@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Build") {
+            steps {
+                echo "Building."
+                // Add your build commands here
+            }
+        }
+        
+        stage("Test") {
+            steps {
+                echo "Testing..."
+                // Add your test commands here
+            }
+        }
+
+        stage("Deploy") {
+            steps {
+                echo "Deploying..."
+                // Add your deploy commands here
+            }
+        }
+    }
+
+    post {
+        always {
+            mail to: "azadehghneiat@gmail.com, dewumisamuduni@gmail.com",
+                 subject: "Build Status Email",
+                 body: """\
+Build Status Notification
+
+The build has completed with the following details:
+
+- **Build Stage**: Completed
+- **Test Stage**: Completed
+- **Deploy Stage**: Completed
+- **Timestamp**: ${new Date()}
+
+Please check the logs for more details.
+"""
+        }
+    }
+}
